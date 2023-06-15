@@ -1,31 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css" type="text/css">
-</head>
-<header>
-    <h1>Thumbnail Hover Effect with <em> CSS3 </em></h1>
-</header>
-<div class="wrapper">
-    <div class="gallery">
-        <ul>
-            <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/53819/9.png"></li>
-            <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/53819/2.png"></li>
-            <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/53819/3.png"></li>
-            <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/53819/1.png"></li>
-            <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/53819/4.png"></li>
-            <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/53819/5.png"></li>
-            <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/53819/7.png"></li>
-            <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/53819/8.png"></li>
-            <li><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/53819/6.png"></li>
-        </ul>
-    </div>
-    <p class="attribution">Images featured in this demo are the works of <a href="https://d.hatena.ne.jp/koochinko">Mernan Behairi</a>. Inspired by an old post of <a href="https://twitter.com/SohTanaka">@Sohtanaka</a>. It originally uses jQuery. Access original <a href="https://web.archive.org/web/20110323065449/http://www.sohtanaka.com/web-design/fancy-thumbnail-hover-effect-w-jquery/">tutorial</a> and <a href="https://web.archive.org/web/20110323065952/http://www.sohtanaka.com/web-design/examples/image-zoom/">demo</a>.</p>
-</div>
-<body>
-    
-</body>
-</html>
+- @images = [{'name' => '2021-03-02-home', 'date' => '02 March 2021', 'location' => 'San Francisco, CA'}, {'name' => '2021-03-01-agate-beach', 'date' => '01 March 2021', 'location' => 'Patrick’s Point State Park, Trinidad, CA'}, {'name' => '2021-02-28-sunset', 'date' => '28 February 2021', 'location' => 'Crescent Harbor, Crescent City, CA'}, {'name' => '2021-02-27-sunset', 'date' => '27 February 2021', 'location' => 'Waldport, OR'}, {'name' => '2021-02-26-sunset', 'date' => '26 February 2021', 'location' => 'Waldport, OR'}, {'name' => '2021-02-26-snow-2', 'date' => '26 February 2021', 'location' => 'Willamette National Forest, OR'}, {'name' => '2021-02-26-rainforest', 'date' => '26 February 2021', 'location' => 'Cascadia, OR'}, {'name' => '2021-02-11-chinatown', 'date' => '11 February 2021', 'location' =>  'Chinatown, San Francisco, CA'}]
+
+%main{:ontouchstart => true}
+	%section.photo-grid
+		%ul.grid-isotope
+			- @images.each do |image|
+				%li.photo-grid-item
+					%figure
+						%picture
+							%source{:srcset => "https://gabriellew.ee/static/images/photography/#{image['name']}.jpg, https://gabriellew.ee/static/images/photography/#{image['name']}.jpg 2x", :media => "(max-width: 3000px)"}
+							%img{:src => "https://gabriellew.ee/static/images/photography/#{image['name']}.jpg", :alt => ""}
+						%figcaption
+							%fieldset
+								%input{:id => "#{image['name']}", :type => "checkbox"}
+								%label.photo-close{:for => "#{image['name']}"}
+								%label.photo-link{:for => "#{image['name']}"}
+									%svg.icon{:viewBox => "0 0 100 100"}
+										%circle{:cx => "49", :cy => "49", :r => "36"}
+										%path{:d => "M45,69 L55,69 M45,39 L50,39 L50,69 M49.5,29 L50,29"}
+								%dl
+									%label{:for => "#{image['name']}"}
+										%svg.icon{:viewBox  => "0 0 100 100"}
+											%polyline{:points => "14 32 50 68 86 32"}
+									%div
+										%dt Date
+										%dd= image['date']
+									%div
+										%dt Location
+										%dd= image['location']
+									%div
+										%dt Camera
+										%dd iPhone 12 Pro Max
+									%div
+										%dt Editor
+										%dd VSCO
+									%a.photo-link{:target => "_blank", :href => "https://gabriellew.ee/static/images/photography/#{image['name']}.jpg", :tabindex => "-1"}
+										%svg.icon{:viewBox => "0 0 100 100"}
+											%path{:d => "M82,38 L82,78.9930191 C82,80.6537288 80.663269,82 78.9989882,82 L21.0010118,82 C19.3435988,82 18,80.663269 18,78.9989882 L18,21.0010118 C18,19.3435988 19.3408574,18 21.0069809,18 L62,18 M88.9559283,10.8111066 L57.9878833,42.132705 M69.2453268,10.8994949 L89.0443166,10.8994949 L89.0443166,30.6984848"}
+								
