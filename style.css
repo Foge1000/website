@@ -30,11 +30,11 @@ pre, code {
 }
 
 a {
-    color: darkgray;
+    color: paleturquoise;
 }
 
 a:visited {
-    color: #6a6a6a;
+    color: blue;
 }
 
 .frontpage-header {
